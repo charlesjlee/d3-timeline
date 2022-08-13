@@ -173,7 +173,7 @@
 					.on("click", function (d, i) {
 
 						console.log("label click!");
-						var point = d3Selection.mouse(this);
+						var point = d3Selection.pointer(this);
 						gParent.append("rect")
 							.attr("id", "clickpoint")
 							.attr("x", point[0])
@@ -313,7 +313,10 @@
 					chartData = d;
 					d.forEach( function(datum, index){
 						var data = datum.times;
-						data.forEach(function(d) { d.name = datum.name; });
+						data.forEach(function(d) {
+							d.name = datum.name;
+							d.post = datum.post;
+						});
 
 						var hasLabel = (typeof(datum.label) != "undefined");
 
@@ -363,7 +366,7 @@
 								mouseout(d, i, datum, i);
 							})
 							.on("click", function (d, i) {
-								var point = d3Selection.mouse(this);
+								var point = d3Selection.pointer(this);
 								var selectedRect = d3Selection.select(this).node();
 								var selectorLabel = "text#" + selectedRect.id + '.textnumbers';
 								var selectedLabel = d3Selection.select(selectorLabel).node();
@@ -395,7 +398,7 @@
 							})
 							.on("click", function(d, i){
 								// when clicking on the label, call the click for the rectangle with the same id
-								var point = d3Selection.mouse(this);
+								var point = d3Selection.pointer(this);
 								var id = this.id;
 								var labelSelector = "text#" + id + ".textnumbers";
 								var selectedLabel = d3Selection.select(labelSelector).node();
@@ -418,7 +421,7 @@
 							})
 							.on("click", function(d, i){
 								// when clicking on the label, call the click for the rectangle with the same id
-								var point = d3Selection.mouse(this);
+								var point = d3Selection.pointer(this);
 								var id = this.id;
 								var selectedLabel = d3Selection.select(this).node();
 								var selector = "rect#" + id;
@@ -501,13 +504,13 @@
 					gParent.classed("scrollable", true)
 						.call(zoom);
 					
-					g.on("wheel", function() {
-						d3Selection.event.preventDefault();
-						d3Selection.event.stopImmediatePropagation();
+					g.on("wheel", function(e) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
 					});
-					g.on("dblclick.zoom", function() {
-						d3Selection.event.preventDefault();
-						d3Selection.event.stopImmediatePropagation();
+					g.on("dblclick.zoom", function(e) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
 					});
 				}
 

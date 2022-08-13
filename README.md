@@ -1,5 +1,17 @@
 # d3-timeline
+This repo is a fork of a series of forks of a d3 timeline package:
+1. https://github.com/jiahuang/d3-timeline
+  original, uses d3 v3
+1. https://github.com/denisemauldin/d3-timeline
+  upgraded from d3 v3 to v4 and other enhancments
+1. https://github.com/LostInBrittany/d3-timeline
+  upgraded from d3 v4 to v5
+1. https://github.com/charlesjlee/d3-timeline
+  upgraded from d3 v5 to v7 but in a wrong way
 
+For my personal use, I upgraded the d3 dependency from v5 to v7. Unfortunately, I did it in a wrong way by updating `dist/d3-timelines.js` directly instead of updating `src/timelines.js`.
+
+# original README
 A d3 v4 version of d3-timeline 
 
 Get something that looks like
